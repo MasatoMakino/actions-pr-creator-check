@@ -22,13 +22,7 @@ jobs:
         env:
           creator: ${{ github.event.pull_request.user.login }}
         run: echo "Pull Request creator = $creator"
-      - name: Check commit signatures
-        uses: dorny/paths-filter@v3
-        id: check_signed_commits
-        env:
-          owner: ${{ github.repository_owner }}
-        with:
-          filters: |
-            commits:
-              paths: "any"
-              signed-by: $owner
+      - name: Verify commit signature
+        run: |
+          git fetch --depth=2 origin ${{ github.sha }}
+          git verify-commit ${{ github.sha }}
