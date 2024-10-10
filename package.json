@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"no test specified\" && exit 0",
     "preversion": "git checkout main && git pull && npm ci && npm test",
-    "postversion": "git add package.json package-lock.json && git checkout -b version/$(git describe --tags --abbrev=0) && git commit -m $(git describe --tags --abbrev=0) && git push --set-upstream-to origin version/$(git describe --tags --abbrev=0) && gh pr create --fill --base main --head version/$(git describe --tags --abbrev=0)"
+    "postversion": "git add package.json package-lock.json && git checkout -b version/$(git describe --tags --abbrev=0) && git push --set-upstream-to origin version/$(git describe --tags --abbrev=0) && gh pr create --fill --base main --head version/$(git describe --tags --abbrev=0)"
   },
   "author": "",
   "license": "UNLICENSED",
