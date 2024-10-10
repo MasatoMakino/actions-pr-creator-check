@@ -9,7 +9,13 @@
     "add_package_files": "git add package.json package-lock.json",
     "checkout_version_branch": "git checkout -b version/$(git describe --tags --abbrev=0)",
     "push_version_branch": "git push --set-upstream origin version/$(git describe --tags --abbrev=0)",
-    "create_version_pr": "gh pr create --fill --base main --head version/$(git describe --tags --abbrev=0) | grep -o 'https.*github.*' | xargs gh pr view --web"
+    "create_version_pr": "gh pr create --fill --base main --head version/$(git describe --tags --abbrev=0) | grep -o 'https.*github.*' | xargs gh pr view --web",
+    "release": "npm run check_version_branch_merged && npm run check_tag_exists && npm run push_tags && npm run create_draft_release && npm run open_draft_release",
+    "check_version_branch_merged": "git fetch origin && git branch --merged origin/main | grep version/$(git describe --tags --abbrev=0) || (echo 'Branch not merged' && exit 1)",
+    "check_tag_exists": "git fetch --tags && (git ls-remote --tags origin | grep -q $(git describe --tags --abbrev=0) && echo 'Tag already exists' && exit 1 || exit 0)",
+    "push_tags": "git push origin $(git describe --tags --abbrev=0)",
+    "create_draft_release": "gh release create $(git describe --tags --abbrev=0) --generate-notes --verify-tag --draft",
+    "open_draft_release": "gh release view $(git describe --tags --abbrev=0) --web"
   },
   "author": "",
   "license": "UNLICENSED",
