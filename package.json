@@ -5,7 +5,11 @@
   "scripts": {
     "test": "echo \"no test specified\" && exit 0",
     "preversion": "git checkout main && git pull && npm ci && npm test",
-    "postversion": "git add package.json package-lock.json && git checkout -b version/$(git describe --tags --abbrev=0) && git push --set-upstream origin version/$(git describe --tags --abbrev=0) && gh pr create --fill --base main --head version/$(git describe --tags --abbrev=0) | grep -o 'https.*github.*' | xargs gh pr view --web"
+    "postversion": "npm run add_package_files && npm run checkout_version_branch && npm run push_version_branch && npm run create_version_pr",
+    "add_package_files": "git add package.json package-lock.json",
+    "checkout_version_branch": "git checkout -b version/$(git describe --tags --abbrev=0)",
+    "push_version_branch": "git push --set-upstream origin version/$(git describe --tags --abbrev=0)",
+    "create_version_pr": "gh pr create --fill --base main --head version/$(git describe --tags --abbrev=0) | grep -o 'https.*github.*' | xargs gh pr view --web"
   },
   "author": "",
   "license": "UNLICENSED",
