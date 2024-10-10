@@ -12,6 +12,8 @@ jobs:
   mapping:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
       - name: Display Repository Owner
         id: show_owner
         env:
@@ -22,13 +24,3 @@ jobs:
         env:
           creator: ${{ github.event.pull_request.user.login }}
         run: echo "Pull Request creator = $creator"
-      - name: Check commit signatures
-        uses: dorny/paths-filter@v3
-        id: check_signed_commits
-        env:
-          owner: ${{ github.repository_owner }}
-        with:
-          filters: |
-            commits:
-              paths: "any"
-              signed-by: $owner
