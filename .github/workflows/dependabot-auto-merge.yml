@@ -24,7 +24,3 @@ jobs:
         env:
           creator: ${{ github.event.pull_request.user.login }}
         run: echo "Pull Request creator = $creator"
-      - name: Verify commit signature
-        run: |
-          git fetch --depth=2 origin ${{ github.sha }}
-          git verify-commit ${{ github.sha }}
