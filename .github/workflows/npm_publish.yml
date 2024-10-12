@@ -15,5 +15,7 @@ jobs:
           node-version: "20"
           registry-url: "https://registry.npmjs.org"
       - run: npm ci
-      - name: Print event information
-        run: echo "Event name ${{ github.event_name }}"; echo "Event payload ${{ toJson(github.event) }}"
+      - name: Print event name
+        run: echo "Event name ${{ github.event_name }}"
+      - name: Print event type
+        run: echo "Event type ${{ github.event.action }}"
