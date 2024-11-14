@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"no test specified\" && exit 0",
-    "preversion": "git checkout main && git pull && npm ci && npm test",
+    "preversion": "node ./bin/preversion.mjs",
     "postversion": "npm run version-add-package-files && npm run version-checkout && npm run version-push && npm run version-pull-request",
     "version-add-package-files": "git add package.json package-lock.json",
     "version-checkout": "git checkout -b version/$(git describe --tags --abbrev=0)",
@@ -19,5 +19,8 @@
   },
   "author": "",
   "license": "UNLICENSED",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "execa": "^9.5.1"
+  }
 }
