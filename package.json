@@ -8,7 +8,7 @@
     "postversion": "npm run version-add-package-files && npm run version-checkout && npm run version-push && npm run version-pull-request",
     "version-add-package-files": "node ./bin/postversion/add_package_files.mjs",
     "version-checkout": "node ./bin/postversion/checkout.mjs",
-    "version-push": "git push --set-upstream origin version/$(git describe --tags --abbrev=0)",
+    "version-push": "node ./bin/postversion/push.mjs",
     "version-pull-request": "gh pr create --fill --base main --head version/$(git describe --tags --abbrev=0) && gh pr merge version/$(git describe --tags --abbrev=0) --merge --auto",
     "release": "npm run release-check-merged && npm run release-check-tag-exists && npm run release-push-tags && npm run release-create-draft && npm run release-open-draft",
     "release-check-merged": "git fetch origin && git branch --merged origin/main | grep version/$(git describe --tags --abbrev=0) || (echo 'Branch not merged' && exit 1)",

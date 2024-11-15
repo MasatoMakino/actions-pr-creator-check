@@ -1,5 +1,5 @@
 import { execa } from "execa";
-import { getTagVersion } from "../getTagVersion.mjs";
-const resultTag = await getTagVersion();
+import { getTagBranchName } from "../getTagVersion.mjs";
+const resultBranchName = await getTagBranchName();
 
-await execa("git", ["checkout", "-b", `version/${resultTag.stdout}`]);
+await execa("git", ["checkout", "-b", resultBranchName]);
