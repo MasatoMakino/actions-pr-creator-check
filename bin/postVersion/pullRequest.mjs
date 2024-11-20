@@ -14,22 +14,29 @@ const prResult = await execa("gh", [
 
 console.log(prResult.stdout);
 
-const result = await execa("gh", [
-  "pr",
-  "merge",
-  branchName,
-  "--merge",
-  "--auto",
-]);
-
-if (result.stderr) {
+try {
+  const result = await execa("gh", [
+    "pr",
+    "merge",
+    branchName,
+    "--merge",
+    "--auto",
+  ]);
+} catch (e) {
   if (
-    result.stderr ===
+    e.stderr ===
     "GraphQL: Pull request Protected branch rules not configured for this branch (enablePullRequestAutoMerge)"
   ) {
-    console.log("open browser!");
+    const match = prResult.stdout.match(/\/pull\/(\d+)$/);
+    if (match) {
+      const prNumber = match[1];
+      await execa("gh", ["browse", prNumber]);
+    } else {
+      console.error(e);
+      throw e;
+    }
   } else {
-    console.error(result.stderr);
-    process.exit(1);
+    console.error(e);
+    throw e;
   }
 }
