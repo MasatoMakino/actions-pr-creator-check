@@ -9,7 +9,7 @@
     "version-add-package-files": "node ./bin/postversion/add_package_files.mjs",
     "version-checkout": "node ./bin/postversion/checkout.mjs",
     "version-push": "node ./bin/postversion/push.mjs",
-    "version-pull-request": "gh pr create --fill --base main --head version/$(git describe --tags --abbrev=0) && gh pr merge version/$(git describe --tags --abbrev=0) --merge --auto",
+    "version-pull-request": "node ./bin/postversion/pullRequest.mjs",
     "release": "npm run release-check-merged && npm run release-check-tag-exists && npm run release-push-tags && npm run release-create-draft && npm run release-open-draft",
     "release-check-merged": "git fetch origin && git branch --merged origin/main | grep version/$(git describe --tags --abbrev=0) || (echo 'Branch not merged' && exit 1)",
     "release-check-tag-exists": "git fetch --tags && (git ls-remote --tags origin | grep -q $(git describe --tags --abbrev=0) && echo 'Tag already exists' && exit 1 || exit 0)",
