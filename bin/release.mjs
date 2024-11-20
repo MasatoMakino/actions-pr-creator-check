@@ -9,8 +9,8 @@ import {
 export async function release() {
   try {
     await checkMerged();
-    await checkTagExists();
-    await pushTags();
+    // await checkTagExists();
+    // await pushTags();
     await createDraft();
     await openDraft();
   } catch (e) {
