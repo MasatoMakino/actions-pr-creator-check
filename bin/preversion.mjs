@@ -1,6 +1,6 @@
 import { execa } from "execa";
 
-await execa("git", ["chechout", "main"]);
+await execa("git", ["checkout", "main"]);
 await execa("git", ["pull", "origin", "main"]);
 await execa("npm", ["ci"]);
 
