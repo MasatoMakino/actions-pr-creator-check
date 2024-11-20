@@ -4,10 +4,12 @@ import {
   push,
   pullRequest,
 } from "./postVersion/index.mjs";
-import { pushTags } from "./release/index.mjs";
+import { checkTagExists, pushTags } from "./release/index.mjs";
 
 export async function postversion() {
   try {
+    await checkTagExists();
+
     await addPackageFiles();
     await checkout();
     await push();
