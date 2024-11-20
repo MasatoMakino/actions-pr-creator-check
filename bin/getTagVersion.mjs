@@ -2,7 +2,7 @@ import { execa } from "execa";
 
 /**
  * get current version with git describe
- * @returns {string} The tag version
+ * @returns {Promise<string>} The tag version
  */
 export async function getTagVersion() {
   const result = await execa("git", ["describe", "--tags", "--abbrev=0"]);
@@ -15,5 +15,5 @@ export async function getTagVersion() {
  */
 export async function getTagBranchName() {
   const result = await getTagVersion();
-  return `version/${result.stdout}`;
+  return `version/${result}`;
 }
