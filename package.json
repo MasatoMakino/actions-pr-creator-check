@@ -6,7 +6,7 @@
     "test": "echo \"no test specified\" && exit 0",
     "preversion": "node ./bin/preversion.mjs",
     "postversion": "npm run version-add-package-files && npm run version-checkout && npm run version-push && npm run version-pull-request",
-    "version-add-package-files": "node ./bin/postversion/add_package_files.mjs",
+    "version-add-package-files": "node ./bin/postVersion/addPackageFiles.mjs",
     "version-checkout": "node ./bin/postversion/checkout.mjs",
     "version-push": "node ./bin/postversion/push.mjs",
     "version-pull-request": "node ./bin/postversion/pullRequest.mjs",
