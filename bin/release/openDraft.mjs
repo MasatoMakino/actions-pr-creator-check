@@ -1,5 +1,5 @@
 import { execa } from "execa";
-import { getTagBranchName } from "../getTagVersion.mjs";
+import { getTagVersion } from "../getTagVersion.mjs";
 
-const tag = await getTagBranchName();
+const tag = await getTagVersion();
 await execa("gh", ["release", "view", tag, "--web"]);
