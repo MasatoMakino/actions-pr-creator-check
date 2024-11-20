@@ -1,3 +1,8 @@
 import { execa } from "execa";
 
-await execa("git", ["add", "package.json", "package-lock.json"]);
+/**
+ * Add package.json and package-lock.json to git
+ */
+export async function addPackageFiles() {
+  await execa("git", ["add", "package.json", "package-lock.json"]);
+}
