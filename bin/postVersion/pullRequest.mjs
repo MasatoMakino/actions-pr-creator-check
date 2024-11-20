@@ -21,7 +21,7 @@ export async function pullRequest() {
       "pr",
       "merge",
       branchName,
-      "--merge",
+      "--rebase",
       "--auto",
     ]);
   } catch (e) {
