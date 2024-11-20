@@ -1,6 +1,6 @@
 {
   "name": "@masatomakino/actions-pr-creator-check",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "main": "index.js",
   "scripts": {
     "test": "echo \"no test specified\" && exit 0",
