@@ -23,20 +23,15 @@ try {
     "--auto",
   ]);
 } catch (e) {
-  if (
-    e.stderr ===
-    "GraphQL: Pull request Protected branch rules not configured for this branch (enablePullRequestAutoMerge)"
-  ) {
+  if (e.stderr.includes("(enablePullRequestAutoMerge)")) {
     const match = prResult.stdout.match(/\/pull\/(\d+)$/);
     if (match) {
       const prNumber = match[1];
       await execa("gh", ["browse", prNumber]);
     } else {
-      console.error(e);
       throw e;
     }
   } else {
-    console.error(e);
     throw e;
   }
 }
