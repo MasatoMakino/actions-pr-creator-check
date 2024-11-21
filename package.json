@@ -2,16 +2,19 @@
   "name": "@masatomakino/actions-pr-creator-check",
   "version": "0.1.18",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"no test specified\" && exit 0",
-    "preversion": "node ./bin/preversion.mjs",
-    "postversion": "node ./bin/postversion.mjs",
-    "release": "node ./bin/release.mjs"
+    "preversion": "node ./dist/preversion.js",
+    "postversion": "node ./dist/postversion.js",
+    "release": "node ./dist/release.js",
+    "build": "tsc"
   },
   "author": "",
   "license": "UNLICENSED",
   "description": "",
   "dependencies": {
-    "execa": "^9.5.1"
+    "execa": "^9.5.1",
+    "typescript": "^5.6.3"
   }
 }
