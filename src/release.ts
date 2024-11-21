@@ -18,4 +18,3 @@ export async function release(): Promise<void> {
   }
 }
 
-release();

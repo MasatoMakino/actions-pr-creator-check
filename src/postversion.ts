@@ -15,5 +15,3 @@ export async function postversion(): Promise<void> {
     throw e;
   }
 }
-
-postversion();
