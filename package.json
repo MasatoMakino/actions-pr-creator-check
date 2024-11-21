@@ -3,17 +3,24 @@
   "version": "0.1.19",
   "main": "index.js",
   "type": "module",
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "release-helper": "dist/CLI.js"
+  },
   "scripts": {
     "test": "echo \"no test specified\" && exit 0",
-    "preversion": "node ./dist/preversion.js",
-    "postversion": "node ./dist/postversion.js",
-    "release": "node ./dist/release.js",
+    "preversion": "node ./dist/cli.js --preversion",
+    "postversion": "node ./dist/cli.js --postversion",
+    "release": "node ./dist/cli.js --release",
     "build": "tsc"
   },
   "author": "",
   "license": "UNLICENSED",
   "description": "",
   "dependencies": {
+    "commander": "^12.1.0",
     "execa": "^9.5.1",
     "typescript": "^5.6.3"
   }
