@@ -3,6 +3,12 @@
   "version": "0.1.19",
   "main": "index.js",
   "type": "module",
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "release-helper": "dist/CLI.js"
+  },
   "scripts": {
     "test": "echo \"no test specified\" && exit 0",
     "preversion": "node ./dist/cli.js --preversion",
