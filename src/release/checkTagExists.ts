@@ -1,10 +1,10 @@
 import { execa } from "execa";
-import { getTagVersion } from "../getTagVersion.mjs";
+import { getTagVersion } from "../getTagVersion.js";
 
 /**
  * Check if the tag already exists
  */
-export async function checkTagExists() {
+export async function checkTagExists(): Promise<void> {
   const tag = await getTagVersion();
   await execa("git", ["fetch", "--tags"]);
   const result = await execa("git", ["ls-remote", "--tags", "origin"]);

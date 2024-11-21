@@ -4,13 +4,13 @@ import {
   pushTags,
   createDraft,
   openDraft,
-} from "./release/index.mjs";
+} from "./release/index.js";
 
-export async function release() {
+export async function release(): Promise<void> {
   try {
     await checkMerged();
     await checkTagExists();
-    await pushTags();   
+    await pushTags();
     await createDraft();
     await openDraft();
   } catch (e) {

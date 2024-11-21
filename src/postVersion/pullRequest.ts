@@ -1,10 +1,10 @@
-import { execa } from "execa";
-import { getTagBranchName } from "../getTagVersion.mjs";
+import { execa, ExecaError } from "execa";
+import { getTagBranchName } from "../getTagVersion.js";
 
 /**
  * create pull request and merge it
  */
-export async function pullRequest() {
+export async function pullRequest(): Promise<void> {
   const branchName = await getTagBranchName();
   const prResult = await execa("gh", [
     "pr",
@@ -24,8 +24,8 @@ export async function pullRequest() {
       "--merge",
       "--auto",
     ]);
-  } catch (e) {
-    if (e.stderr.includes("(enablePullRequestAutoMerge)")) {
+  } catch (e: unknown) {
+    if (isExecaError(e) && e.stderr.includes("(enablePullRequestAutoMerge)")) {
       const match = prResult.stdout.match(/\/pull\/(\d+)$/);
       if (match) {
         const prNumber = match[1];
@@ -37,4 +37,8 @@ export async function pullRequest() {
       throw e;
     }
   }
+}
+
+function isExecaError(e: unknown): e is ExecaError {
+  return (e as ExecaError).name === "ExecaError";
 }

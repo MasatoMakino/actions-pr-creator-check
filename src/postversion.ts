@@ -3,9 +3,9 @@ import {
   checkout,
   push,
   pullRequest,
-} from "./postVersion/index.mjs";
+} from "./postVersion/index.js";
 
-export async function postversion() {
+export async function postversion(): Promise<void> {
   try {
     await addPackageFiles();
     await checkout();
