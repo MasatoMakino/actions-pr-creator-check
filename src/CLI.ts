@@ -9,7 +9,8 @@ program
   .option("--preversion", "preversion hook")
   .option("--postversion", "postversion hook")
   .option("--release", "release hook")
-  .option("--dry-run", "skip commit and tag");
+  .option("--dry-run", "skip commit and tag", false)
+  .option("--default-branch <defaultBranch>", "default branch name", "main");
 
 program.parse();
 
@@ -26,17 +27,21 @@ if (options.preversion + options.postversion + options.release === 0) {
 }
 
 const runCommand = async () => {
+  const commandOption = {
+    defaultBranch: options.defaultBranch,
+    dryRun: options.dryRun,
+  };
   switch (true) {
     case options.preversion:
-      await preversion();
+      await preversion(commandOption);
       break;
 
     case options.postversion:
-      await postversion();
+      await postversion(commandOption);
       break;
 
     case options.release:
-      await release();
+      await release(commandOption);
       break;
   }
 };
