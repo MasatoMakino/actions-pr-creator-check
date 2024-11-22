@@ -22,7 +22,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm test
-      - run: node ./dist/cli.js --preversion --dry-run
-      - run: node ./dist/cli.js --postversion --dry-run
-      - run: node ./dist/cli.js --release --dry-run
+      - run: npm run dry-preversion
+      - run: npm run dry-postversion
+      - run: npm run dry-release
       
