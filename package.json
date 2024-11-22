@@ -11,12 +11,12 @@
   },
   "scripts": {
     "test": "echo \"no test specified\" && exit 0",
-    "preversion": "node ./dist/cli.js --preversion",
-    "postversion": "node ./dist/cli.js --postversion",
-    "release": "node ./dist/cli.js --release",
-    "dry-preversion": "node ./dist/cli.js --preversion --dry-run",
-    "dry-postversion": "node ./dist/cli.js --postversion --dry-run",
-    "dry-release": "node ./dist/cli.js --release --dry-run",
+    "preversion": "node ./dist/CLI.js --preversion",
+    "postversion": "node ./dist/CLI.js --postversion",
+    "release": "node ./dist/CLI.js --release",
+    "dry-preversion": "node ./dist/CLI.js --preversion --dry-run",
+    "dry-postversion": "node ./dist/CLI.js --postversion --dry-run",
+    "dry-release": "node ./dist/CLI.js --release --dry-run",
     "build": "tsc"
   },
   "author": "",
