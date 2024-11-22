@@ -14,9 +14,6 @@
     "preversion": "node ./dist/CLI.js --preversion",
     "postversion": "node ./dist/CLI.js --postversion",
     "release": "node ./dist/CLI.js --release",
-    "dry-preversion": "node ./dist/CLI.js --preversion --dry-run",
-    "dry-postversion": "node ./dist/CLI.js --postversion --dry-run",
-    "dry-release": "node ./dist/CLI.js --release --dry-run",
     "build": "tsc"
   },
   "author": "",
