@@ -11,9 +11,9 @@
   },
   "scripts": {
     "test": "echo \"no test specified\" && exit 0",
-    "preversion": "node ./dist/CLI.js --preversion",
-    "postversion": "node ./dist/CLI.js --postversion",
-    "release": "node ./dist/CLI.js --release",
+    "preversion": "node ./dist/CLI.js preversion",
+    "postversion": "node ./dist/CLI.js postversion",
+    "release": "node ./dist/CLI.js release",
     "build": "tsc"
   },
   "author": "",
