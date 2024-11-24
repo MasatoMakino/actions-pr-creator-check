@@ -10,7 +10,8 @@ program
   .option("--postversion", "postversion hook")
   .option("--release", "release hook")
   .option("--dry-run", "skip commit and tag", false)
-  .option("--default-branch <defaultBranch>", "default branch name", "main");
+  .option("--default-branch <defaultBranch>", "default branch name", "main")
+  .option("--test-command <testCommand>", "test command", "npm test");
 
 program.parse();
 
@@ -30,6 +31,7 @@ const runCommand = async () => {
   const commandOption = {
     defaultBranch: options.defaultBranch,
     dryRun: options.dryRun,
+    testCommand: options.testCommand,
   };
   switch (true) {
     case options.preversion:
