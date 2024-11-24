@@ -25,12 +25,19 @@ add the following to your `package.json`
 ## Options
 
 ```console
-Options:
-  --preversion                      preversion hook
-  --postversion                     postversion hook
-  --release                         release hook
+preversion Options:
   --dry-run                         skip commit and tag (default: false)
   --default-branch <defaultBranch>  default branch name (default: "main")
   --test-command <testCommand>      test command (default: "npm test")
   -h, --help                        display help for command
+
+postversion Options:
+  --dry-run                         skip commit and tag (default: false)
+  --default-branch <defaultBranch>  default branch name (default: "main")
+  -h, --help                        display help for command
+
+release Options:
+  --dry-run                         skip commit and tag (default: false)
+  --default-branch <defaultBranch>  default branch name (default: "main")
+  -h, --help                        display help for command  
 ```
