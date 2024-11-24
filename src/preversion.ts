@@ -1,7 +1,11 @@
-import { CommandOptions } from "CommandOptions.js";
+import { CommonCommandOptions } from "CommandOptions.js";
 import { execa } from "execa";
 
-export async function preversion(options: CommandOptions): Promise<void> {
+interface PreversionOptions extends CommonCommandOptions {
+  testCommand: string;
+}
+
+export async function preversion(options: PreversionOptions): Promise<void> {
   await execa("git", ["fetch", "origin", options.defaultBranch]);
   await execa("git", ["checkout", options.defaultBranch]);
   await execa("git", ["pull", "origin", options.defaultBranch]);

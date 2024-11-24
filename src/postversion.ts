@@ -1,4 +1,4 @@
-import { CommandOptions } from "CommandOptions.js";
+import { CommonCommandOptions } from "CommandOptions.js";
 import {
   addPackageFiles,
   checkout,
@@ -6,7 +6,9 @@ import {
   pullRequest,
 } from "./postVersion/index.js";
 
-export async function postversion(options: CommandOptions): Promise<void> {
+export async function postversion(
+  options: CommonCommandOptions,
+): Promise<void> {
   try {
     if (options.dryRun) {
       console.log("Dry run enabled");
