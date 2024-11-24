@@ -11,7 +11,9 @@ export async function preversion(options: CommandOptions): Promise<void> {
     console.log("Dry run enabled. Skipping tests");
     return;
   } else {
-    const resultTest = await execa("npm", ["test"]);
+    const testCommand = options.testCommand.split(" ");
+    const [command, ...args] = testCommand;
+    const resultTest = await execa(command, args);
     console.log(resultTest.stdout);
   }
 }
