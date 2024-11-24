@@ -3,15 +3,16 @@ import { getTagBranchName } from "../getTagVersion.js";
 
 /**
  * create pull request and merge it
+ * @param defaultBranch - The default branch of the repository
  */
-export async function pullRequest(): Promise<void> {
+export async function pullRequest(defaultBranch: string): Promise<void> {
   const branchName = await getTagBranchName();
   const prResult = await execa("gh", [
     "pr",
     "create",
     "--fill",
     "--base",
-    "main",
+    defaultBranch,
     "--head",
     branchName,
   ]);

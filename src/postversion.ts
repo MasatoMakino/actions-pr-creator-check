@@ -15,7 +15,7 @@ export async function postversion(options: CommandOptions): Promise<void> {
       await addPackageFiles();
       await checkout();
       await push();
-      await pullRequest();
+      await pullRequest(options.defaultBranch);
     }
   } catch (e) {
     throw e;

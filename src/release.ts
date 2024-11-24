@@ -7,13 +7,13 @@ import {
   openDraft,
 } from "./release/index.js";
 
-export async function release(option: CommandOptions): Promise<void> {
+export async function release(options: CommandOptions): Promise<void> {
   try {
-    if (option.dryRun) {
+    if (options.dryRun) {
       console.log("Dry run enabled");
       return;
     }
-    await checkMerged();
+    await checkMerged(options.defaultBranch);
     await checkTagExists();
     await pushTags();
     await createDraft();
