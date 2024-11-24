@@ -1,4 +1,4 @@
-import { CommandOptions } from "CommandOptions.js";
+import { CommonCommandOptions } from "CommandOptions.js";
 import {
   checkMerged,
   checkTagExists,
@@ -7,7 +7,7 @@ import {
   openDraft,
 } from "./release/index.js";
 
-export async function release(options: CommandOptions): Promise<void> {
+export async function release(options: CommonCommandOptions): Promise<void> {
   try {
     if (options.dryRun) {
       console.log("Dry run enabled");
