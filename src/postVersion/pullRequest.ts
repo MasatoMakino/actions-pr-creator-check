@@ -1,4 +1,4 @@
-import { execa, ExecaError } from "execa";
+import { execa, type ExecaError } from "execa";
 import { getTagBranchName } from "../getTagVersion.js";
 
 /**
