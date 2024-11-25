@@ -1,0 +1,8 @@
+{
+	"editor.defaultFormatter": "biomejs.biome",
+	"prettier.embeddedLanguageFormatting": "off",
+	"prettier.enable": false,
+	"[typescript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	}
+}
