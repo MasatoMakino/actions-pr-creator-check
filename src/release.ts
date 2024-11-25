@@ -2,9 +2,9 @@ import type { CommonCommandOptions } from "CommandOptions.js";
 import {
 	checkMerged,
 	checkTagExists,
-	pushTags,
 	createDraft,
 	openDraft,
+	pushTags,
 } from "./release/index.js";
 
 export async function release(options: CommonCommandOptions): Promise<void> {

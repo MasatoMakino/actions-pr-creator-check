@@ -1,4 +1,4 @@
 export interface CommonCommandOptions {
-  defaultBranch: string;
-  dryRun: boolean;
+	defaultBranch: string;
+	dryRun: boolean;
 }
