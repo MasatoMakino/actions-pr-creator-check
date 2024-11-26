@@ -5,24 +5,24 @@ import { execa } from "execa";
  * @returns {Promise<string>} The tag version
  */
 export async function getTagVersion(): Promise<string> {
-  const result = await execa("git", ["describe", "--tags", "--abbrev=0"]);
-  return result.stdout;
+	const result = await execa("git", ["describe", "--tags", "--abbrev=0"]);
+	return result.stdout;
 }
 
 export async function getPreviousTagVersion(): Promise<string> {
-  const prevHashResult = await execa("git", [
-    "rev-list",
-    "--tags",
-    "--skip=1",
-    "--max-count=1",
-  ]);
-  const versionResult = await execa("git", [
-    "describe",
-    "--tags",
-    "--abbrev=0",
-    prevHashResult.stdout,
-  ]);
-  return versionResult.stdout;
+	const prevHashResult = await execa("git", [
+		"rev-list",
+		"--tags",
+		"--skip=1",
+		"--max-count=1",
+	]);
+	const versionResult = await execa("git", [
+		"describe",
+		"--tags",
+		"--abbrev=0",
+		prevHashResult.stdout,
+	]);
+	return versionResult.stdout;
 }
 
 /**
@@ -30,7 +30,6 @@ export async function getPreviousTagVersion(): Promise<string> {
  * @returns {Promise<string>} The branch name to be created
  */
 export async function getTagBranchName(): Promise<string> {
-  const result = await getTagVersion();
-  return `version/${result}`;
+	const result = await getTagVersion();
+	return `version/${result}`;
 }
-

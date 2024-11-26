@@ -5,36 +5,36 @@ import { release } from "./release.js";
 
 const program = new Command();
 const dryRunOption = new Option("--dry-run", "skip commit and tag").default(
-  false,
+	false,
 );
 const defaultBranchOption = new Option(
-  "--default-branch <defaultBranch>",
-  "default branch name",
+	"--default-branch <defaultBranch>",
+	"default branch name",
 ).default("main");
 
 program
-  .command("preversion")
-  .addOption(dryRunOption)
-  .addOption(defaultBranchOption)
-  .option("--test-command <testCommand>", "test command", "npm test")
-  .action(async (options) => {
-    await preversion(options);
-  });
+	.command("preversion")
+	.addOption(dryRunOption)
+	.addOption(defaultBranchOption)
+	.option("--test-command <testCommand>", "test command", "npm test")
+	.action(async (options) => {
+		await preversion(options);
+	});
 
 program
-  .command("postversion")
-  .addOption(dryRunOption)
-  .addOption(defaultBranchOption)
-  .action(async (options) => {
-    await postversion(options);
-  });
+	.command("postversion")
+	.addOption(dryRunOption)
+	.addOption(defaultBranchOption)
+	.action(async (options) => {
+		await postversion(options);
+	});
 
 program
-  .command("release")
-  .addOption(dryRunOption)
-  .addOption(defaultBranchOption)
-  .action(async (options) => {
-    await release(options);
-  });
+	.command("release")
+	.addOption(dryRunOption)
+	.addOption(defaultBranchOption)
+	.action(async (options) => {
+		await release(options);
+	});
 
 program.parse();

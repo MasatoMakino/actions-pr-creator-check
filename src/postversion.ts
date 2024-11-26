@@ -1,25 +1,20 @@
-import { CommonCommandOptions } from "CommandOptions.js";
+import type { CommonCommandOptions } from "CommandOptions.js";
 import {
-  addPackageFiles,
-  checkout,
-  push,
-  pullRequest,
+	addPackageFiles,
+	checkout,
+	pullRequest,
+	push,
 } from "./postVersion/index.js";
 
 export async function postversion(
-  options: CommonCommandOptions,
+	options: CommonCommandOptions,
 ): Promise<void> {
-  try {
-    if (options.dryRun) {
-      console.log("Dry run enabled");
-      return;
-    } else {
-      await addPackageFiles();
-      await checkout();
-      await push();
-      await pullRequest(options.defaultBranch);
-    }
-  } catch (e) {
-    throw e;
-  }
+	if (options.dryRun) {
+		console.log("Dry run enabled");
+		return;
+	}
+	await addPackageFiles();
+	await checkout();
+	await push();
+	await pullRequest(options.defaultBranch);
 }
