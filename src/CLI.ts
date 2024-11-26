@@ -1,6 +1,7 @@
 import { Command, Option } from "commander";
 import { postversion } from "./postversion.js";
 import { preversion } from "./preversion.js";
+import { previewRelease } from "./previewRelease.js";
 import { release } from "./release.js";
 
 const program = new Command();
@@ -36,6 +37,13 @@ program
 	.addOption(defaultBranchOption)
 	.action(async (options) => {
 		await release(options);
+	});
+
+program
+	.command("preview")
+	.description("get release note from GitHub release")
+	.action(async () => {
+		await previewRelease();
 	});
 
 program.parse();
