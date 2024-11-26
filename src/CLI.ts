@@ -25,6 +25,7 @@ program
 	.command("postversion")
 	.addOption(dryRunOption)
 	.addOption(defaultBranchOption)
+	.option("--use-auto-merge", "enable auto merge", true)
 	.action(async (options) => {
 		await postversion(options);
 	});

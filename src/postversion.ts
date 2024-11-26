@@ -6,9 +6,11 @@ import {
 	push,
 } from "./postVersion/index.js";
 
-export async function postversion(
-	options: CommonCommandOptions,
-): Promise<void> {
+interface PostversionOptions extends CommonCommandOptions {
+	useAutoMerge: boolean;
+}
+
+export async function postversion(options: PostversionOptions): Promise<void> {
 	if (options.dryRun) {
 		console.log("Dry run enabled");
 		return;
@@ -16,5 +18,5 @@ export async function postversion(
 	await addPackageFiles();
 	await checkout();
 	await push();
-	await pullRequest(options.defaultBranch);
+	await pullRequest(options.defaultBranch, options.useAutoMerge);
 }
