@@ -15,6 +15,9 @@ const defaultBranchOption = new Option(
 
 program
 	.command("preversion")
+	.description(
+		"checkout to default branch and pull latest changes, and run test",
+	)
 	.addOption(dryRunOption)
 	.addOption(defaultBranchOption)
 	.option("--test-command <testCommand>", "test command", "npm test")
@@ -24,6 +27,7 @@ program
 
 program
 	.command("postversion")
+	.description("create a pull request on GitHub")
 	.addOption(dryRunOption)
 	.addOption(defaultBranchOption)
 	.option("--use-auto-merge", "enable auto merge", true)
@@ -33,6 +37,7 @@ program
 
 program
 	.command("release")
+	.description("push version tag and create a release on GitHub")
 	.addOption(dryRunOption)
 	.addOption(defaultBranchOption)
 	.action(async (options) => {
