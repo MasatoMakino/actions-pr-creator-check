@@ -19,6 +19,8 @@ export async function pullRequest(
 		defaultBranch,
 		"--head",
 		branchName,
+		"--label",
+		"release",
 	]);
 
 	// If the auto merge is enabled, merge the pull request automatically
