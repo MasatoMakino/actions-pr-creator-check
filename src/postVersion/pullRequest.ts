@@ -1,5 +1,7 @@
-import { type ExecaError, execa } from "execa";
+import { execa } from "execa";
+import { addPullRequestLabel } from "../addPullRequestLabel.js";
 import { getTagBranchName } from "../getTagVersion.js";
+import { isExecaError } from "../isExecaError.js";
 
 const releaseLabel = "release";
 
@@ -42,33 +44,15 @@ export async function pullRequest(
 	}
 }
 
-function isExecaError(e: unknown): e is ExecaError {
-	return (e as ExecaError).name === "ExecaError";
-}
-
 /**
  * initialize release label
  */
 async function initReleaseLabel() {
-	try {
-		await execa("gh", [
-			"label",
-			"create",
-			releaseLabel,
-			"--description",
-			"Pull request for the new release version",
-			"--color",
-			"f29513",
-		]);
-	} catch (e) {
-		if (
-			isExecaError(e) &&
-			e.stderr.includes("already exists; use `--force` to update")
-		) {
-			return;
-		}
-		throw e;
-	}
+	await addPullRequestLabel(
+		releaseLabel,
+		"Pull request for the new release version",
+		"f29513",
+	);
 }
 
 /**
