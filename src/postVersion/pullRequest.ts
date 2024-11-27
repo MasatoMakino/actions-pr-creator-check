@@ -50,14 +50,24 @@ function isExecaError(e: unknown): e is ExecaError {
  * initialize release label
  */
 async function initReleaseLabel() {
-	const isLabelExist = await execa("gh", [
-		"label",
-		"list",
-		"--search",
-		releaseLabel,
-	]);
-	if (isLabelExist.stdout.includes("no labels in")) {
-		await execa("gh", ["label", "create", releaseLabel, "--color", "f29513"]);
+	try {
+		await execa("gh", [
+			"label",
+			"create",
+			releaseLabel,
+			"--description",
+			"Pull request for the new release version",
+			"--color",
+			"f29513",
+		]);
+	} catch (e) {
+		if (
+			isExecaError(e) &&
+			e.stderr.includes("already exists; use `--force` to update")
+		) {
+			return;
+		}
+		throw e;
 	}
 }
 
