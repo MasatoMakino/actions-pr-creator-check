@@ -1,5 +1,5 @@
 import { execa } from "execa";
-import semver from "semver";
+import * as semver from "semver";
 import { getTagVersion } from "./getTagVersion.js";
 
 /**
