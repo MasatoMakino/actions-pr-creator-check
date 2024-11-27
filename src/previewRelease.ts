@@ -29,5 +29,3 @@ export async function previewRelease(): Promise<void> {
 
 	await execa("gh", ["release", "delete", nextTag]);
 }
-
-previewRelease();
