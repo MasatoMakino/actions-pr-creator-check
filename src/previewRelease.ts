@@ -1,5 +1,4 @@
 import { execa } from "execa";
-import * as semver from "semver";
 import { getTagVersion } from "./getTagVersion.js";
 
 /**
@@ -8,11 +7,7 @@ import { getTagVersion } from "./getTagVersion.js";
  */
 export async function previewRelease(): Promise<void> {
 	const tag = await getTagVersion();
-	const nextTag = semver.inc(tag, "prerelease", "preview");
-
-	if (typeof nextTag !== "string") {
-		throw new Error("Could not create a preview release");
-	}
+	const nextTag = `${tag}-preview0`;
 
 	await execa("gh", [
 		"release",
