@@ -1,6 +1,8 @@
 import { type ExecaError, execa } from "execa";
 import { getTagBranchName } from "../getTagVersion.js";
 
+const releaseLabel = "release";
+
 /**
  * create pull request and merge it
  * @param defaultBranch - The default branch of the repository
@@ -10,6 +12,8 @@ export async function pullRequest(
 	defaultBranch: string,
 	useAutoMerge: boolean,
 ): Promise<void> {
+	await initReleaseLabel();
+
 	const branchName = await getTagBranchName();
 	const prResult = await execa("gh", [
 		"pr",
@@ -20,7 +24,7 @@ export async function pullRequest(
 		"--head",
 		branchName,
 		"--label",
-		"release",
+		releaseLabel,
 	]);
 
 	// If the auto merge is enabled, merge the pull request automatically
@@ -32,14 +36,29 @@ export async function pullRequest(
 		await handleMergeError(e, prResult.stdout);
 	}
 
-	// If the auto merge is disabled, open the browser
 	if (!useAutoMerge) {
+		// If the auto merge is disabled, open the browser
 		await openBrowser(prResult.stdout);
 	}
 }
 
 function isExecaError(e: unknown): e is ExecaError {
 	return (e as ExecaError).name === "ExecaError";
+}
+
+/**
+ * initialize release label
+ */
+async function initReleaseLabel() {
+	const isLabelExist = await execa("gh", [
+		"label",
+		"list",
+		"--search",
+		releaseLabel,
+	]);
+	if (isLabelExist.stdout.includes("no labels in")) {
+		await execa("gh", ["label", "create", releaseLabel, "--color", "f29513"]);
+	}
 }
 
 /**
