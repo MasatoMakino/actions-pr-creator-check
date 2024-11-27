@@ -1,4 +1,5 @@
 import { Command, Option } from "commander";
+import { initLabel } from "./initLabel.js";
 import { postversion } from "./postversion.js";
 import { preversion } from "./preversion.js";
 import { previewRelease } from "./previewRelease.js";
@@ -49,6 +50,13 @@ program
 	.description("get release note from GitHub release")
 	.action(async () => {
 		await previewRelease();
+	});
+
+program
+	.command("init")
+	.description("initialize release label")
+	.action(async () => {
+		await initLabel();
 	});
 
 program.parse();
