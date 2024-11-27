@@ -1,6 +1,7 @@
 import { Command, Option } from "commander";
 import { postversion } from "./postversion.js";
 import { preversion } from "./preversion.js";
+import { previewRelease } from "./previewRelease.js";
 import { release } from "./release.js";
 
 const program = new Command();
@@ -14,6 +15,9 @@ const defaultBranchOption = new Option(
 
 program
 	.command("preversion")
+	.description(
+		"checkout to default branch and pull latest changes, and run test",
+	)
 	.addOption(dryRunOption)
 	.addOption(defaultBranchOption)
 	.option("--test-command <testCommand>", "test command", "npm test")
@@ -23,6 +27,7 @@ program
 
 program
 	.command("postversion")
+	.description("create a pull request on GitHub")
 	.addOption(dryRunOption)
 	.addOption(defaultBranchOption)
 	.option("--use-auto-merge", "enable auto merge", true)
@@ -32,10 +37,18 @@ program
 
 program
 	.command("release")
+	.description("push version tag and create a release on GitHub")
 	.addOption(dryRunOption)
 	.addOption(defaultBranchOption)
 	.action(async (options) => {
 		await release(options);
+	});
+
+program
+	.command("preview")
+	.description("get release note from GitHub release")
+	.action(async () => {
+		await previewRelease();
 	});
 
 program.parse();
