@@ -1,5 +1,5 @@
 import { execa } from "execa";
-import { isExecaError } from "isExecaError.js";
+import { isExecaError } from "./isExecaError.js";
 
 /**
  * initialize release label
