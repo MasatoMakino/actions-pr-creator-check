@@ -8,12 +8,6 @@ export async function initLabel() {
 	);
 
 	await addPullRequestLabel(
-		"dependabot-update",
-		"Automatically created by GitHub Dependabot to update dependencies",
-		"0366d6",
-	);
-
-	await addPullRequestLabel(
 		"major",
 		"Pull request for the new major version",
 		"b60205",
