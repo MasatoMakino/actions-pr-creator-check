@@ -13,6 +13,7 @@ export async function watchMerged(prURL: string) {
 	const startTime = Date.now();
 
 	return new Promise((resolve, reject) => {
+		console.log("Watching PR state...");
 		const checkPRState = async () => {
 			try {
 				const result = await execa("gh", [
