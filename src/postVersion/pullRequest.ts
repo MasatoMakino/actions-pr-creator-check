@@ -39,6 +39,7 @@ export async function pullRequest(
 				"--merge",
 				"--auto",
 			]);
+			console.log(result);
 			return result.stdout;
 		}
 	} catch (e: unknown) {
