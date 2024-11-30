@@ -1,10 +1,10 @@
 import type { CommonCommandOptions } from "CommandOptions.js";
-import { watchMerged } from "postVersion/watchMerged.js";
 import {
 	addPackageFiles,
 	checkout,
 	pullRequest,
 	push,
+	watchMerged,
 } from "./postVersion/index.js";
 
 interface PostversionOptions extends CommonCommandOptions {
