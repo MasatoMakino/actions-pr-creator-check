@@ -1,4 +1,5 @@
 import type { CommonCommandOptions } from "CommandOptions.js";
+import { watchMerged } from "postVersion/watchMerged.js";
 import {
 	addPackageFiles,
 	checkout,
@@ -18,5 +19,9 @@ export async function postversion(options: PostversionOptions): Promise<void> {
 	await addPackageFiles();
 	await checkout();
 	await push();
-	await pullRequest(options.defaultBranch, options.useAutoMerge);
+	const prURL = await pullRequest(options.defaultBranch, options.useAutoMerge);
+	console.log(prURL);
+	if (prURL) {
+		watchMerged(options.defaultBranch, prURL);
+	}
 }

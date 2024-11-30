@@ -13,7 +13,7 @@ const releaseLabel = "release";
 export async function pullRequest(
 	defaultBranch: string,
 	useAutoMerge: boolean,
-): Promise<void> {
+): Promise<string | undefined> {
 	await initReleaseLabel();
 
 	const branchName = await getTagBranchName();
@@ -32,7 +32,14 @@ export async function pullRequest(
 	// If the auto merge is enabled, merge the pull request automatically
 	try {
 		if (useAutoMerge) {
-			await execa("gh", ["pr", "merge", branchName, "--merge", "--auto"]);
+			const result = await execa("gh", [
+				"pr",
+				"merge",
+				branchName,
+				"--merge",
+				"--auto",
+			]);
+			return result.stdout;
 		}
 	} catch (e: unknown) {
 		await handleMergeError(e, prResult.stdout);
@@ -42,6 +49,7 @@ export async function pullRequest(
 		// If the auto merge is disabled, open the browser
 		await openBrowser(prResult.stdout);
 	}
+	return undefined;
 }
 
 /**
