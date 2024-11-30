@@ -6,6 +6,7 @@ import {
 	push,
 	watchMerged,
 } from "./postVersion/index.js";
+import { release } from "./release.js";
 
 interface PostversionOptions extends CommonCommandOptions {
 	useAutoMerge: boolean;
@@ -20,8 +21,12 @@ export async function postversion(options: PostversionOptions): Promise<void> {
 	await checkout();
 	await push();
 	const prURL = await pullRequest(options.defaultBranch, options.useAutoMerge);
-	console.log(prURL);
-	if (prURL) {
-		watchMerged(prURL);
+	if (!options.useAutoMerge || !prURL) {
+		return;
+	}
+
+	const marged = await watchMerged(prURL);
+	if (marged) {
+		await release(options);
 	}
 }
