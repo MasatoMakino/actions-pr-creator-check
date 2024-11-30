@@ -18,5 +18,5 @@ export async function release(options: CommonCommandOptions): Promise<void> {
 	await pushTags();
 	await createDraft();
 	await openDraft();
-	await deleteBranch();
+	await deleteBranch(options.defaultBranch);
 }
