@@ -10,4 +10,5 @@ export async function deleteBranch(defaultBranch: string): Promise<void> {
 	const branchName = await getTagBranchName();
 	await execa("git", ["branch", "-d", branchName]);
 	await execa("git", ["push", "origin", "--delete", branchName]);
+	await execa("git", ["pull", "origin", defaultBranch]);
 }
