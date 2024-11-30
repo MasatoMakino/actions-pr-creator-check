@@ -4,10 +4,7 @@ import { execa } from "execa";
  *
  * @param prURL - The URL of the pull request
  */
-export async function watchMerged(defaultBranch: string, prURL: string) {
-	const prNumber = prURL.split("/").pop();
-	const prBranch = `pr/${prNumber}`;
-
+export async function watchMerged(prURL: string) {
 	const result = await execa("gh", [
 		"pr",
 		"view",

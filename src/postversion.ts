@@ -22,6 +22,6 @@ export async function postversion(options: PostversionOptions): Promise<void> {
 	const prURL = await pullRequest(options.defaultBranch, options.useAutoMerge);
 	console.log(prURL);
 	if (prURL) {
-		watchMerged(options.defaultBranch, prURL);
+		watchMerged(prURL);
 	}
 }
