@@ -4,6 +4,7 @@ import {
 	checkout,
 	pullRequest,
 	push,
+	watchMerged,
 } from "./postVersion/index.js";
 
 interface PostversionOptions extends CommonCommandOptions {
@@ -18,5 +19,9 @@ export async function postversion(options: PostversionOptions): Promise<void> {
 	await addPackageFiles();
 	await checkout();
 	await push();
-	await pullRequest(options.defaultBranch, options.useAutoMerge);
+	const prURL = await pullRequest(options.defaultBranch, options.useAutoMerge);
+	console.log(prURL);
+	if (prURL) {
+		watchMerged(options.defaultBranch, prURL);
+	}
 }
