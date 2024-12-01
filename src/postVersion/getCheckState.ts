@@ -10,8 +10,10 @@ export async function getCheckStatus(prURL: string) {
 	const timeout = 180_000; // 180 seconds
 	const startTime = Date.now();
 
+	console.log(`Watching the status of the checks on ${prURL}...`);
 	return new Promise((resolve, reject) => {
 		const checkStatus = async () => {
+			console.log("...checking status");
 			try {
 				const checkResult = await execa("gh", [
 					"pr",
@@ -32,7 +34,7 @@ export async function getCheckStatus(prURL: string) {
 
 				// all checks are successful
 				if (result.every((check) => check.state === "SUCCESS")) {
-					console.log("All required checks are successful");
+					console.log("All required checks are successful.");
 					clearInterval(intervalId);
 					resolve("success");
 				}
