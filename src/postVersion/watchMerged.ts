@@ -3,8 +3,6 @@ import { getCheckStatus } from "./getCheckState.js";
 
 /**
  * watch the pull request until it is merged.
- * Inerval is 3 seconds.
- * Wait for up to 180 seconds.
  *
  * @param prURL - The URL of the pull request
  */
