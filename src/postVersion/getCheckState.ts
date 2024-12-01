@@ -37,13 +37,7 @@ export async function getCheckStatus(prURL: string) {
 					resolve("success");
 				}
 
-				if (Date.now() - startTime >= timeout) {
-					console.log(
-						`Timeout: Checks did not complete within ${timeout / 1000} seconds`,
-					);
-					clearInterval(intervalId);
-					resolve("timeout");
-				}
+				checkTimeout(startTime, timeout, intervalId, resolve);
 			} catch (e) {
 				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 				if ((e as any).stderr.includes("no required checks reported")) {
@@ -56,13 +50,7 @@ export async function getCheckStatus(prURL: string) {
 					return;
 				}
 
-				if (Date.now() - startTime >= timeout) {
-					console.log(
-						`Timeout: Checks did not complete within ${timeout / 1000} seconds`,
-					);
-					clearInterval(intervalId);
-					resolve("timeout");
-				}
+				checkTimeout(startTime, timeout, intervalId, resolve);
 
 				clearInterval(intervalId);
 				reject(e);
@@ -72,4 +60,19 @@ export async function getCheckStatus(prURL: string) {
 		const intervalId = setInterval(checkStatus, interval);
 		checkStatus();
 	});
+}
+
+function checkTimeout(
+	startTime: number,
+	timeout: number,
+	intervalId: number,
+	resolve: (reason?: string) => void,
+) {
+	if (Date.now() - startTime >= timeout) {
+		console.log(
+			`Timeout: Checks did not complete within ${timeout / 1000} seconds`,
+		);
+		clearInterval(intervalId);
+		resolve("timeout");
+	}
 }
