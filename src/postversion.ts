@@ -2,6 +2,7 @@ import type { CommonCommandOptions } from "CommandOptions.js";
 import {
 	addPackageFiles,
 	checkout,
+	openBrowser,
 	pullRequest,
 	push,
 	watchMerged,
@@ -29,5 +30,7 @@ export async function postversion(options: PostversionOptions): Promise<void> {
 	if (autoMergeResult === "merged") {
 		console.log("PR was successfully merged.");
 		await release(options);
+	} else {
+		await openBrowser(prURL);
 	}
 }

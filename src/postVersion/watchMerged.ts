@@ -9,7 +9,7 @@ import { getCheckStatus } from "./getCheckState.js";
 export async function watchMerged(prURL: string) {
 	const checkResult = await getCheckStatus(prURL);
 	if (checkResult !== "success") {
-		console.log("Some checks are failed, skip watching PR state");
+		console.log("skip watching PR state");
 		return "failed";
 	}
 

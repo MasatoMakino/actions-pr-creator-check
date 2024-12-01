@@ -84,7 +84,7 @@ async function handleMergeError(e: unknown, prUrl: string) {
  * @param output url of pull request
  * @returns is open browser
  */
-async function openBrowser(output: string) {
+export async function openBrowser(output: string) {
 	const match = output.match(/\/pull\/(\d+)$/);
 	if (match) {
 		const prNumber = match[1];
