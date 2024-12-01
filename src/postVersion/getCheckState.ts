@@ -8,6 +8,11 @@ import { execa } from "execa";
 export async function getCheckStatus(
 	prURL: string,
 ): Promise<"success" | undefined> {
+	const started = await getCheckStarted(prURL);
+	if (started !== "started") {
+		return;
+	}
+
 	try {
 		const checkResult = await execa("gh", [
 			"pr",
@@ -36,4 +41,48 @@ export async function getCheckStatus(
 		}
 		throw e;
 	}
+}
+
+/**
+ * wait until the checks are started
+ * @param prURL
+ * @returns
+ */
+async function getCheckStarted(prURL: string) {
+	const interval = 3_000; // 3 seconds
+	const timeout = 180_000; // 180 seconds
+	const startTime = Date.now();
+
+	return new Promise((resolve, reject) => {
+		const checkStarted = async () => {
+			try {
+				const checkResult = await execa("gh", [
+					"pr",
+					"checks",
+					prURL,
+					"--required",
+					"--json",
+					"state",
+				]);
+				if (checkResult) {
+					resolve("started");
+				} else if (Date.now() - startTime >= timeout) {
+					console.log("Timeout: Checks did not complete within 180 seconds");
+					clearInterval(intervalId);
+					resolve("timeout");
+				}
+			} catch (e) {
+				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+				if ((e as any).stderr.includes("no checks reported")) {
+					return;
+				}
+
+				clearInterval(intervalId);
+				reject(e);
+			}
+		};
+
+		const intervalId = setInterval(checkStarted, interval);
+		checkStarted();
+	});
 }
