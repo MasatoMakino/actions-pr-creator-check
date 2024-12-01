@@ -25,8 +25,8 @@ export async function postversion(options: PostversionOptions): Promise<void> {
 		return;
 	}
 
-	const marged = await watchMerged(prURL);
-	if (marged) {
+	const autoMergeResult = await watchMerged(prURL);
+	if (autoMergeResult === "merged") {
 		console.log("PR was successfully merged.");
 		await release(options);
 	}

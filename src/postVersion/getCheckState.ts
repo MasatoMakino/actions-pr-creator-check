@@ -7,7 +7,7 @@ import { execa } from "execa";
  */
 export async function getCheckStatus(
 	prURL: string,
-): Promise<string | undefined> {
+): Promise<"success" | undefined> {
 	try {
 		const checkResult = await execa("gh", [
 			"pr",
@@ -18,9 +18,16 @@ export async function getCheckStatus(
 			"--json",
 			"state",
 		]);
-		// console.log(checkResult);
-		const result = JSON.parse(checkResult.stdout);
-		// console.log(result);
+		const result: [{ state: string }] = JSON.parse(checkResult.stdout);
+
+		if (result.every((check) => check.state === "SUCCESS")) {
+			// all checks are successful
+			console.log("All required checks are successful");
+			return "success";
+		}
+
+		console.log("Some checks are failed");
+		return;
 	} catch (e) {
 		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		if ((e as any).stderr.includes("no required checks reported")) {
@@ -30,5 +37,3 @@ export async function getCheckStatus(
 		throw e;
 	}
 }
-
-getCheckStatus("70");
