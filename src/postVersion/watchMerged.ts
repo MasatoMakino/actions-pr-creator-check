@@ -14,6 +14,7 @@ export async function watchMerged(prURL: string) {
 
 	return new Promise((resolve, reject) => {
 		console.log("Watching PR state...");
+
 		const checkPRState = async () => {
 			try {
 				const result = await execa("gh", [
@@ -29,6 +30,9 @@ export async function watchMerged(prURL: string) {
 				if (result.stdout === "MERGED") {
 					clearInterval(intervalId);
 					resolve("merged");
+				} else if (result.stdout === "CLOSED") {
+					clearInterval(intervalId);
+					reject(new Error("PR was closed without merging"));
 				} else if (Date.now() - startTime >= timeout) {
 					clearInterval(intervalId);
 					reject(new Error("Timeout: PR was not merged within 180 seconds"));
