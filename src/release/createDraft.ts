@@ -48,6 +48,6 @@ ${dependenciesContent}
 
 		console.log("replaced body:");
 		console.log(replacedBody);
-		await execa("gh", ["release", "edit", tag, "--body", body]);
+		await execa("gh", ["release", "edit", tag, "--notes", replacedBody]);
 	}
 }
