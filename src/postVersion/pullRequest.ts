@@ -1,7 +1,7 @@
 import { execa } from "execa";
 import { addPullRequestLabel } from "../addPullRequestLabel.js";
 import { getTagBranchName } from "../getTagVersion.js";
-import { isExecaError } from "../isExecaError.js";
+import { isExecaError, isExecaErrorWithErrorCode } from "../isExecaError.js";
 
 const releaseLabel = "release";
 
@@ -69,7 +69,7 @@ async function initReleaseLabel() {
  * @param prUrl
  */
 async function handleMergeError(e: unknown, prUrl: string) {
-	if (isExecaError(e) && e.stderr.includes("(enablePullRequestAutoMerge)")) {
+	if (isExecaErrorWithErrorCode(e, "(enablePullRequestAutoMerge)")) {
 		const isOpenBrowser = await openBrowser(prUrl);
 		if (!isOpenBrowser) {
 			throw e;
