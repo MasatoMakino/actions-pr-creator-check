@@ -19,8 +19,15 @@ export async function previewRelease(): Promise<void> {
 		"--draft",
 	]);
 
-	const viewResult = await execa("gh", ["release", "view", nextTag]);
-	console.log(viewResult.stdout);
+	const viewResult = await execa("gh", [
+		"release",
+		"view",
+		nextTag,
+		"--json",
+		"body",
+	]);
+	const body = JSON.parse(viewResult.stdout).body;
+	console.log(body);
 
 	await execa("gh", ["release", "delete", nextTag]);
 }
