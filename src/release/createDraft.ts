@@ -46,6 +46,7 @@ ${dependenciesContent}
 			wrappedDependencies,
 		);
 
+		console.log("replaced body:");
 		console.log(replacedBody);
 		await execa("gh", ["release", "edit", tag, "--body", body]);
 	}
