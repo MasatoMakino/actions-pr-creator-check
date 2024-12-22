@@ -38,7 +38,7 @@ export async function createDraft(): Promise<void> {
 ${match[1].trim()}
 
 <details>
-<summary>Full list of updated dependencies</summary>
+<summary>All Updated Dependencies</summary>
 
 ${match[2].trim()}
 
