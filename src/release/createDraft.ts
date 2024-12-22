@@ -30,14 +30,18 @@ export async function createDraft(): Promise<void> {
 	console.log(body);
 
 	const dependenciesSectionRegex =
-		/(### 🔧 Dependencies[\s\S]*?)(?=\n### |\n\n)/;
+		/(### 🔧 Dependencies\n)([\s\S]*?)(?=\n### |\n\n)/;
 	const match = body.match(dependenciesSectionRegex);
 
 	if (match) {
-		const dependenciesContent = match[1].trim();
-		const wrappedDependencies = `<details>
-<summary>### 🔧 Dependencies</summary>
-${dependenciesContent}
+		const wrappedDependencies = `
+${match[1].trim()}
+
+<details>
+<summary>All Updated Dependencies</summary>
+
+${match[2].trim()}
+
 </details>
 `;
 
