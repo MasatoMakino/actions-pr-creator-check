@@ -42,6 +42,7 @@ export async function getCheckStatus(prURL: string) {
 			} catch (e) {
 				if (isExecaErrorWithErrorCode(e, "no required checks reported")) {
 					console.log("No required checks reported.");
+					console.log(e);
 					clearInterval(intervalId);
 					resolve("failed");
 				}
