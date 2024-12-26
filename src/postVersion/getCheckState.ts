@@ -26,6 +26,8 @@ export async function getCheckStatus(prURL: string) {
 				]);
 				const result: [{ state: string }] = JSON.parse(checkResult.stdout);
 
+				console.log(result);
+
 				if (result.some((check) => check.state === "FAILURE")) {
 					console.log("Some checks are failed");
 					clearInterval(intervalId);
