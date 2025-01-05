@@ -4,7 +4,9 @@
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
-		"test": "echo \"no test specified\" && exit 0"
+		"test": "echo \"no test specified\" && exit 0",
+		"preversion": "npx @masatomakino/release-helper preversion",
+		"postversion": "npx @masatomakino/release-helper postversion"
 	},
 	"author": "",
 	"description": "",
