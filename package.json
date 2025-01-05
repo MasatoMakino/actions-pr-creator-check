@@ -10,5 +10,6 @@
 	"description": "",
 	"devDependencies": {
 		"@masatomakino/release-helper": "file:masatomakino-release-helper-0.1.6.tgz"
-	}
+	},
+	"packageManager": "pnpm@8.6.0+sha1.71f9126a20cd3d00fa47c188f956918858180e54"
 }
