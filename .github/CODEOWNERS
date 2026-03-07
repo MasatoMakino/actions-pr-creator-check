@@ -1,0 +1,8 @@
+# Workflow files - owner approval required
+/.github/workflows/ @MasatoMakino
+
+# Claude Code configuration - owner approval required
+/CLAUDE.md @MasatoMakino
+
+# GitHub configuration
+/.github/ @MasatoMakino
